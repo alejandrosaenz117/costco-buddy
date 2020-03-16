@@ -23,7 +23,7 @@ rl.on('line', line => {
     fetchItemStatus(urlAry);
     setTimeout(() => {
       fetchItemStatus(urlAry);
-    }, 1000 * 60 * 60);
+    }, 1800000);
   } else {
     console.info('Product list is empty.  Costco Buddy will now exit.');
     process.exit();
@@ -52,7 +52,7 @@ function fetchItemStatus(line) {
             return;
           } else {
             console.info(
-              `The following item is still out of stock: ${url}.  Costco Buddy will check again in 1 (one) hour!`
+              `The following item is still out of stock: ${url}.  Costco Buddy will check again in 30 (thirty) minutes!`
             );
             return;
           }
