@@ -34,7 +34,7 @@ npm start
 Input a comma delimited list of Costco product URLs.
 
 ```
-Welcome to Costo Buddy! Please enter a comma delimited list of Costo product URLs>https://www.costco.com/.product.{someId}.html, https://www.costco.com/.product.{someId}.html
+Welcome to Costo Buddy! Please enter a comma delimited list of Costco product URLs>https://www.costco.com/.product.{someId}.html, https://www.costco.com/.product.{someId}.html
 ```
 
 ## License
