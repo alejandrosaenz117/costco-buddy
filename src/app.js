@@ -14,7 +14,7 @@ let urlAry = [];
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
-  prompt: 'Welcome to Costo Buddy! Please enter a comma delimited list of Costo product URLs>'
+  prompt: 'Welcome to Costco Buddy! Please enter a comma delimited list of Costo product URLs>'
 });
 rl.prompt();
 rl.on('line', line => {
