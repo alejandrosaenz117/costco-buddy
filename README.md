@@ -1,6 +1,6 @@
 # Costco Buddy
 
-A Costco stock notification CLI tool.
+A Costco stock email notification CLI tool.
 
 ## Getting Started
 
