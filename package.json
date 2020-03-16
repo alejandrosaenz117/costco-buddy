@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "A Costco stock notification system.",
   "main": "dist/app.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:Whamo12/costco-buddy.git"
+  },
   "scripts": {
     "start": "node src/app.js",
     "start:dev": "nodemon src/app.js",
@@ -11,12 +15,9 @@
   "author": "Alejandro Saenz",
   "license": "MIT",
   "devDependencies": {
-    "nodemon": "^2.0.2",
-    "tslint": "^6.1.0",
-    "typescript": "^3.8.3"
+    "nodemon": "^2.0.2"
   },
   "dependencies": {
-    "@types/node": "^13.9.1",
     "axios": "^0.19.2",
     "dotenv": "^8.2.0",
     "nodemailer": "^6.4.5"
