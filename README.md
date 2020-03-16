@@ -14,7 +14,6 @@ Make sure you have [Node.js](http://nodejs.org/).
 
 ```
 npm install
-npm start
 ```
 
 Create a `.env` file with the following properties:
