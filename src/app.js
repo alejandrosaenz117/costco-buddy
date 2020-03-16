@@ -36,28 +36,32 @@ rl.on('line', line => {
  * @returns HTTP status code
  */
 function fetchItemStatus(line) {
-  console.log('Fetching item status...');
+  console.log('Costco Buddy is fetching product statuses.  Stand by!');
   urlAry.forEach(async (url, index, object) => {
     try {
-      await axios.get(url, {
-        validateStatus: status => {
-          if (status === 200) {
-            console.info(`The following item is in stock: ${url}.  Please check your email!`);
-            sentInStockEmail(url);
-            object.splice(index, 1);
-            if (!object.length) {
-              console.info('All items in the product list are now in stock.  Costco Buddy will now exit.');
-              process.exit();
-            }
-            return;
-          } else {
-            console.info(
-              `The following item is still out of stock: ${url}.  Costco Buddy will check again in 30 (thirty) minutes!`
-            );
-            return;
+      let res = await axios.get(url);
+      if (res.status === 200) {
+        if (!(res.data.includes('Product Not Found') || res.data.includes('content="out of stock"'))) {
+          console.info(`\nThe following item is in stock: ${url}.  Please check your email!`);
+          sentInStockEmail(url);
+          object.splice(index, 1);
+          if (!object.length) {
+            console.info('\nAll items in the product list are now in stock.  Costco Buddy will now exit.');
+            process.exit();
           }
+          return;
+        } else {
+          console.info(
+            `\nThe following item is still out of stock: ${url}.  Costco Buddy will check again in 30 (thirty) minutes!`
+          );
+          return;
         }
-      });
+      } else {
+        console.info(
+          `\nThe following item is still out of stock: ${url}.  Costco Buddy will check again in 30 (thirty) minutes!`
+        );
+        return;
+      }
     } catch (error) {
       // TODO: Figure out why Axios is throwing an exception even if the status is 200
     }
