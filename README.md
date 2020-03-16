@@ -23,5 +23,20 @@ FROM_EMAIL=
 FROM_EMAIL_PASSWORD=
 TO_EMAIL=
 ```
+
+### Usage
+
+```
+npm start
+```
+
+#### Example
+
+Input a comma delimited list of Costco product URLs.
+
+```
+Welcome to Costo Buddy! Please enter a comma delimited list of Costo product URLs>https://www.costco.com/.product.{someId}.html, https://www.costco.com/.product.{someId}.html
+```
+
 ## License
 This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/Whamo12/idor-chat/blob/master/LICENSE) file for details
