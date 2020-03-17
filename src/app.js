@@ -11,6 +11,7 @@ let transporter = nodemailer.createTransport({
   }
 });
 let urlAry = [];
+let retryCount = 0;
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
@@ -23,7 +24,7 @@ rl.on('line', line => {
     fetchItemStatus(urlAry);
     setTimeout(() => {
       fetchItemStatus(urlAry);
-    }, 1800000);
+    }, 900000); // Update to increase/decrease iteration
   } else {
     console.info('Product list is empty.  Costco Buddy will now exit.');
     process.exit();
@@ -36,7 +37,8 @@ rl.on('line', line => {
  * @returns HTTP status code
  */
 function fetchItemStatus(line) {
-  console.log('Costco Buddy is fetching product statuses.  Stand by!');
+  retryCount++;
+  console.log(`Costco Buddy is fetching product inventory status.  Please stand by! \nFetch Count: ${retryCount}`);
   urlAry.forEach(async (url, index, object) => {
     try {
       let res = await axios.get(url);
@@ -51,15 +53,11 @@ function fetchItemStatus(line) {
           }
           return;
         } else {
-          console.info(
-            `\nThe following item is still out of stock: ${url}.  Costco Buddy will check again in 30 (thirty) minutes!`
-          );
+          retryConsoleInfo(url);
           return;
         }
       } else {
-        console.info(
-          `\nThe following item is still out of stock: ${url}.  Costco Buddy will check again in 30 (thirty) minutes!`
-        );
+        retryConsoleInfo(url);
         return;
       }
     } catch (error) {
@@ -96,4 +94,15 @@ function sentInStockEmail(url) {
     text: `An Item you are watching is in stock! \n${url}`
   };
   sendEmail(mailOptions);
+}
+
+/**
+ * @description Retry console.info
+ * @param {string} uuid
+ * @returns console.info
+ */
+function retryConsoleInfo(url) {
+  console.info(
+    `\nThe following item is still out of stock: ${url}.  Costco Buddy will check again in 15 (fifteen) minutes!`
+  );
 }
